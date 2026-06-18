@@ -3,4 +3,5 @@ __pycache__/
 .env
 vector_db/
 downloads/
-*.pyc
+*.pycdownloades/
+.DS_Store
