@@ -19,10 +19,18 @@ def download_youtube_audio(url: str) -> str:
         "noplaylist": True,
         "extract_flat": False,
         "quiet": False,
+        "geo_bypass": True,
         "extractor_args": {
             "youtube": {
-                "player_client": ["android"]
+                "player_client": ["web", "android"]
             }
+        },
+        "http_headers": {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/137.0.0.0 Safari/537.36"
+            )
         },
         "postprocessors": [
             {
@@ -110,7 +118,15 @@ def process_input(source: str) -> list:
 
     if source.startswith("http://") or source.startswith("https://"):
         print("Detected YouTube URL. Downloading audio...")
-        wav_path = download_youtube_audio(source)
+
+        try:
+            wav_path = download_youtube_audio(source)
+
+        except Exception:
+            raise Exception(
+                "Unable to download this YouTube video from the cloud deployment. "
+                "Please upload the audio/video file directly."
+            )
 
     else:
         print("Detected local file. Converting to WAV...")
