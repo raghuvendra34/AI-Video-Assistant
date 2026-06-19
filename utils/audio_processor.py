@@ -1,8 +1,12 @@
 import yt_dlp
-from pydub import AudioSegment
 import os
+import ffmpeg
+try:
+    from pydub import AudioSegment
+except Exception as e:
+    print(f"Pydub import failed: {e}")
 
-DOWNLOAD_DIR = 'downloades'
+DOWNLOAD_DIR = 'downloads'
 os.makedirs(DOWNLOAD_DIR,exist_ok = True)
 
 def download_youtube_audio(url :str) ->str:
