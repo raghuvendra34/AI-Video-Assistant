@@ -14,11 +14,16 @@ def download_youtube_audio(url: str) -> str:
     output_path = os.path.join(DOWNLOAD_DIR, "%(title)s.%(ext)s")
 
     ydl_opts = {
-        "format": "bestaudio",
+        "format": "bestaudio/best",
         "outtmpl": output_path,
         "noplaylist": True,
         "extract_flat": False,
         "quiet": False,
+        "extractor_args": {
+            "youtube": {
+                "player_client": ["android"]
+            }
+        },
         "postprocessors": [
             {
                 "key": "FFmpegExtractAudio",
@@ -45,7 +50,7 @@ def download_youtube_audio(url: str) -> str:
             return filename
 
     except Exception as e:
-        print(f"YT-DLP ERROR: {e}")
+        print(f"YT-DLP FULL ERROR: {repr(e)}")
         raise Exception(f"YouTube download failed: {e}")
 
 
