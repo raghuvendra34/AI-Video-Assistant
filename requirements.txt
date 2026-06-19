@@ -43,3 +43,9 @@ numpy>=1.26.0
 tqdm>=4.66.0                      # Progress bars
 requests>=2.32.0
 langchain-chroma>=0.2.0
+
+# whisper realated packages
+openai-whisper>=20231117
+torch>=2.2.0
+torchaudio>=2.2.0
+torchvision>=0.17.0
